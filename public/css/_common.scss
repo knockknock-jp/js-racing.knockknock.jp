@@ -1,0 +1,135 @@
+%m__txt-logo {
+  font-family: 'Racing Sans One', sans-serif;
+  font-weight: bold;
+  font-size: $px50;
+  letter-spacing: 0;
+  color: #FC0;
+  @include text-shadow(2px 2px 0px #F60, 4px 4px 2px #000);
+}
+
+%m__txt-logo-sub {
+  font-family: 'Racing Sans One', sans-serif;
+  font-weight: bold;
+  font-size: $px28;
+  letter-spacing: 0;
+  color: #599ddd;
+  @include text-shadow(1px 1px 0px #176bf3, 2px 2px 2px #000);
+}
+
+%m__txt-logo-sub2 {
+  font-family: 'Racing Sans One', sans-serif;
+  font-weight: bold;
+  font-size: $px18;
+  letter-spacing: 0;
+  color: #67be4f;
+  @include text-shadow(1px 1px 0px #007f26, 2px 2px 2px #000);
+}
+
+%m__txt-logo-sp {
+  font-family: 'Racing Sans One', sans-serif;
+  font-weight: bold;
+  font-size: $px36;
+  letter-spacing: 0;
+  color: #FC0;
+  @include text-shadow(1px 1px 0px #F60, 2px 2px 2px #000);
+}
+
+%m__txt-logo-sub-sp {
+  font-family: 'Racing Sans One', sans-serif;
+  font-weight: bold;
+  font-size: $px18;
+  letter-spacing: 0;
+  color: #599ddd;
+  @include text-shadow(1px 1px 0px #176bf3, 2px 2px 2px #000);
+}
+
+%m__txt-size-l {
+  font-size: $px24;
+  color: #FFF;
+}
+
+%m__txt-size-m {
+  font-size: $px16;
+  color: #FFF;
+}
+
+%m__txt-size-s {
+  font-size: $px12;
+  color: #FFF;
+}
+
+%m__box-black {
+  display: block;
+  @include box-sizing("border-box");
+  @include box-shadow(rgba(0, 0, 0, .5) 1px 1px 2px);
+  padding: 40px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, .6);
+}
+
+%m__btn-white {
+  display: block;
+  @include box-sizing("border-box");
+  @include box-shadow(rgba(0, 0, 0, .5) 1px 1px 2px);
+  //border: solid 2px #FFF;
+  padding: 10px 20px;
+  font-family: 'Racing Sans One', sans-serif;
+  font-weight: bold;
+  font-size: $px28;
+  letter-spacing: 0;
+  color: #C00;
+  border-radius: 5px;
+  text-align: center;
+  background-color: #FFF;
+  //@include background(linear-gradient(#FFF, #DDD));
+  &:hover {
+    //border: solid 2px #C00;
+    text-decoration: none;
+    color: #FFF;
+    @include background(linear-gradient(#F00, #C00));
+  }
+}
+
+%m__btn-white-s {
+  display: block;
+  @include box-sizing("border-box");
+  @include box-shadow(rgba(0, 0, 0, .5) 1px 1px 2px);
+  //border: solid 2px #FFF;
+  padding: 0 10px;
+  font-family: 'Racing Sans One', sans-serif;
+  font-weight: bold;
+  font-size: $px14;
+  letter-spacing: 0;
+  color: #C00;
+  border-radius: 3px;
+  text-align: center;
+  background-color: #FFF;
+  //@include background(linear-gradient(#FFF, #DDD));
+  &:hover {
+    //border: solid 2px #C00;
+    text-decoration: none;
+    color: #FFF;
+    @include background(linear-gradient(#F00, #C00));
+  }
+}
+
+%m__btn-black {
+  display: block;
+  @include box-sizing("border-box");
+  @include box-shadow(rgba(0, 0, 0, .3) 1px 1px 2px);
+  border: solid 2px #000;
+  padding: 20px;
+  font-family: 'Racing Sans One', sans-serif;
+  font-weight: bold;
+  letter-spacing: 0;
+  color: #FFF;
+  border-radius: 5px;
+  text-align: center;
+  @include background(linear-gradient(#111, #000));
+  &:hover {
+    color: #000;
+    text-decoration: none;
+    @include text-shadow(0 0 5px #EDF8FF);
+    @include background(linear-gradient(#000, #111));
+  }
+}

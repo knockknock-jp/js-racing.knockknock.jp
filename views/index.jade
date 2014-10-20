@@ -1,0 +1,356 @@
+doctype html
+html(lang="ja")
+    head
+        meta(charset="UTF-8")
+        title #{title} #{version}
+        meta(property="og:title" content="#{title}")
+        meta(property="og:type" content="website")
+        meta(property="og:url" content="http://js-racing.knockknock.jp/")
+        meta(property="og:locale" content="ja_JP")
+        meta(property="og:image" content="http://js-racing.knockknock.jp/fb.jpg")
+        meta(property="og:site_name" content="#{title} #{version}")
+        meta(property="og:description" content="This content is an online car racing game. I'm using WebSocket and WebGL. Game it is possible to operate the car using the smartphone. Please enjoy Come on.")
+        link(href='http://fonts.googleapis.com/css?family=Racing+Sans+One',rel='stylesheet' type='text/css')
+        link(href='http://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css')
+        link(rel="stylesheet", href="css/base.css")
+        link(rel="stylesheet", href="css/index.css")
+    body
+        |<div id="fb-root"></div>
+        |<script>(function(d, s, id) {
+        |var js, fjs = d.getElementsByTagName(s)[0];
+        |if (d.getElementById(id)) return;
+        |js = d.createElement(s); js.id = id;
+        |js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&appId=170385386456940&version=v2.0";
+        |fjs.parentNode.insertBefore(js, fjs);
+        |}(document, 'script', 'facebook-jssdk'));</script>
+
+        // #preloader
+        div#preloader.preloader(style="display: none;")
+            p#preloaderTxt.preloader__txt #{title} #{version} Loading... (
+                span#preloaderLoaded 0
+                | /
+                span#preloaderTotal 0
+                | )
+
+        // #main
+        div#main.main(style="display: none;")
+
+            // #view3d
+            div#view3d.view3d(style="display: none;")
+
+            // #physics
+            canvas#physics.physics(width="800", height="800", style="display: none;")
+
+            // #scene
+            div#scene.scene
+
+                // #sceneOpening
+                section#sceneOpening.scene-opening(style="display: none;")
+                    div.scene-opening__inner
+                        div.scene-opening__box5
+                            h1.scene-opening__ttl
+                                span.scene-opening__ttl__txt #{title}
+                                    br
+                                span.scene-opening__ttl__txt2 &nbsp;#{version}
+                        div.scene-opening__box
+                            div.scene-opening__box-left
+                                div.scene-opening__box2
+                                    h2.scene-opening__ttl2 Operation
+                                    div.scene-opening__box2-left
+                                        h3.scene-opening__ttl3 Smartphone
+                                        div.scene-opening__box3
+                                            img#sceneOpeningImg(widht="100", height="100")
+                                        div#sceneOpeningTxt.scene-opening__txt &nbsp;
+                                    div.scene-opening__box2-right
+                                        h3.scene-opening__ttl3 Desktop
+                                        div.scene-opening__box6
+                                            div.scene-opening__key ▲W
+                                        div.scene-opening__box6
+                                            div.scene-opening__key ◀A
+                                            div.scene-opening__key ▼S
+                                            div.scene-opening__key ▶︎D
+                                        div.scene-opening__box6
+                                            div.scene-opening__key2 SPACE
+                                        ul.scene-opening__list-key
+                                            li ▲/W : Forward
+                                            li ▼/S : Back
+                                            li ◀︎/A : Left
+                                            li ▶︎/D : Right
+                                            li SPACE : CameraAngle
+                            div.scene-opening__box-right
+                                div.scene-opening__box2
+                                    h2.scene-opening__ttl2 Color
+                                    div.scene-opening__box4
+                                        div.scene-opening__box4-left
+                                            h3.scene-opening__ttl3.mb5.tal Body
+                                        div.scene-opening__box4-right
+                                            ul.scene-opening__list-color
+                                                li
+                                                    a.sceneOpeningBtnBodyColor.scene-opening__btn-color(href="#", data-color="#111111") ✔
+                                                li
+                                                    a.sceneOpeningBtnBodyColor.scene-opening__btn-color(href="#", data-color="#555555") ✔
+                                                li
+                                                    a.sceneOpeningBtnBodyColor.scene-opening__btn-color(href="#", data-color="#ffffff") ✔
+                                                li
+                                                    a.sceneOpeningBtnBodyColor.scene-opening__btn-color(href="#", data-color="#ff6699") ✔
+                                                li
+                                                    a.sceneOpeningBtnBodyColor.scene-opening__btn-color(href="#", data-color="#cc0000") ✔
+                                                li
+                                                    a.sceneOpeningBtnBodyColor.scene-opening__btn-color(href="#", data-color="#660066") ✔
+                                                li
+                                                    a.sceneOpeningBtnBodyColor.scene-opening__btn-color(href="#", data-color="#3366cc") ✔
+                                                li
+                                                    a.sceneOpeningBtnBodyColor.scene-opening__btn-color(href="#", data-color="#009999") ✔
+                                                li
+                                                    a.sceneOpeningBtnBodyColor.scene-opening__btn-color(href="#", data-color="#0099ff") ✔
+                                                li
+                                                    a.sceneOpeningBtnBodyColor.scene-opening__btn-color(href="#", data-color="#336600") ✔
+                                                li
+                                                    a.sceneOpeningBtnBodyColor.scene-opening__btn-color(href="#", data-color="#cc9900") ✔
+                                                li
+                                                    a.sceneOpeningBtnBodyColor.scene-opening__btn-color(href="#", data-color="#ff6600") ✔
+                                    div.scene-opening__box4
+                                        div.scene-opening__box4-left
+                                            h3.scene-opening__ttl3.mb5.tal Wing
+                                        div.scene-opening__box4-right
+                                            ul.scene-opening__list-color
+                                                li
+                                                    a.sceneOpeningBtnWingColor.scene-opening__btn-color(href="#", data-color="#111111") ✔
+                                                li
+                                                    a.sceneOpeningBtnWingColor.scene-opening__btn-color(href="#", data-color="#555555") ✔
+                                                li
+                                                    a.sceneOpeningBtnWingColor.scene-opening__btn-color(href="#", data-color="#ffffff") ✔
+                                                li
+                                                    a.sceneOpeningBtnWingColor.scene-opening__btn-color(href="#", data-color="#ff6699") ✔
+                                                li
+                                                    a.sceneOpeningBtnWingColor.scene-opening__btn-color(href="#", data-color="#cc0000") ✔
+                                                li
+                                                    a.sceneOpeningBtnWingColor.scene-opening__btn-color(href="#", data-color="#660066") ✔
+                                                li
+                                                    a.sceneOpeningBtnWingColor.scene-opening__btn-color(href="#", data-color="#3366cc") ✔
+                                                li
+                                                    a.sceneOpeningBtnWingColor.scene-opening__btn-color(href="#", data-color="#009999") ✔
+                                                li
+                                                    a.sceneOpeningBtnWingColor.scene-opening__btn-color(href="#", data-color="#0099ff") ✔
+                                                li
+                                                    a.sceneOpeningBtnWingColor.scene-opening__btn-color(href="#", data-color="#336600") ✔
+                                                li
+                                                    a.sceneOpeningBtnWingColor.scene-opening__btn-color(href="#", data-color="#cc9900") ✔
+                                                li
+                                                    a.sceneOpeningBtnWingColor.scene-opening__btn-color(href="#", data-color="#ff6600") ✔
+                                    div.scene-opening__box4
+                                        div.scene-opening__box4-left
+                                            h3.scene-opening__ttl3.mb5.tal Driver
+                                        div.scene-opening__box4-right
+                                            ul.scene-opening__list-color
+                                                li
+                                                    a.sceneOpeningBtnDriverColor.scene-opening__btn-color(href="#", data-color="#111111") ✔
+                                                li
+                                                    a.sceneOpeningBtnDriverColor.scene-opening__btn-color(href="#", data-color="#555555") ✔
+                                                li
+                                                    a.sceneOpeningBtnDriverColor.scene-opening__btn-color(href="#", data-color="#ffffff") ✔
+                                                li
+                                                    a.sceneOpeningBtnDriverColor.scene-opening__btn-color(href="#", data-color="#ff6699") ✔
+                                                li
+                                                    a.sceneOpeningBtnDriverColor.scene-opening__btn-color(href="#", data-color="#cc0000") ✔
+                                                li
+                                                    a.sceneOpeningBtnDriverColor.scene-opening__btn-color(href="#", data-color="#660066") ✔
+                                                li
+                                                    a.sceneOpeningBtnDriverColor.scene-opening__btn-color(href="#", data-color="#3366cc") ✔
+                                                li
+                                                    a.sceneOpeningBtnDriverColor.scene-opening__btn-color(href="#", data-color="#009999") ✔
+                                                li
+                                                    a.sceneOpeningBtnDriverColor.scene-opening__btn-color(href="#", data-color="#0099ff") ✔
+                                                li
+                                                    a.sceneOpeningBtnDriverColor.scene-opening__btn-color(href="#", data-color="#336600") ✔
+                                                li
+                                                    a.sceneOpeningBtnDriverColor.scene-opening__btn-color(href="#", data-color="#cc9900") ✔
+                                                li
+                                                    a.sceneOpeningBtnDriverColor.scene-opening__btn-color(href="#", data-color="#ff6600") ✔
+                                div.scene-opening__box2
+                                    h2.scene-opening__ttl2 Name
+                                    div.scene-opening__box2__inner
+                                        input#sceneOpeningName.scene-opening__input-text(type="text", maxlength="15")
+                        ul.scene-opening__list
+                            li.scene-opening__list__item
+                                a#sceneOpeningBtnTimeAtack.scene-opening__btn-time-atack(href="#sceneTimeAtack") PLAY
+
+                // #sceneTimeAtack
+                section#sceneTimeAtack.scene-time-atack(style="display: none;")
+                    h1.scene-time-atack__ttl
+                        span.scene-time-atack__ttl__txt TimeAttack
+
+                    // #sceneTimeAtackRun
+                    section#sceneTimeAtackRun.run(style="display: none;")
+                        div.run__inner-lt
+                            div#sceneTimeAtackRunLapTime.run__lap-time
+                                ul.run__lap-time__list
+                                    li.run__lap-time__list__item.run__lap-time__list__item_current.run__lap-time__txt4 Time :
+                                        span#sceneTimeAtackRunLapTimeCurrent.run__lap-time__txt 00:00:0
+                                    li#sceneTimeAtackRunLapTimeFastest.run__lap-time__list__item.run__lap-time__list__item_fastest(style="display: none;")
+                                        div.run_lap-time__box
+                                            div.run_lap-time__box-left
+                                                a#sceneTimeAtackRunBtnSave.run__btn-save Save
+                                            div.run_lap-time__box-right.run__lap-time__txt4 Fastest Lap :
+                                                span#sceneTimeAtackRunLapTimeFastestTxt.run__lap-time__txt2 00:00:0
+                                ul#sceneTimeAtackRunLapTimeList.run__lap-time__list
+                                    li.run__lap-time__list__item.run__lap-time__list__item_past.run__lap-time__txt4 Lap
+                                        span.sceneTimeAtackRunLapTimeListLap.run__lap-time__txt4 1
+                                        span.run__lap-time__txt4 :
+                                        span.sceneTimeAtackRunLapTimeListTime.run__lap-time__txt3 00:00:0
+                        div.run__inner-lb
+                            div#sceneTimeAtackRunEngineCondition.run__engine-condition
+                                div.run__engine-condition__box
+                                    div.run__engine-condition__box-left
+                                        svg.run__engine-condition__mater(viewBox="0 0 200 200")
+                                            | <path style="opacity:0.5;fill:#FFFFFF;" d="M100,0C44.772,0,0,44.771,0,100c0,27.614,11.193,52.614,29.289,70.711l35.355-35.355
+                                            | C55.596,126.307,50,113.807,50,100c0-27.614,22.386-50,50-50s50,22.386,50,50c0,13.807-5.596,26.307-14.645,35.355l35.355,35.355
+                                            | C188.807,152.614,200,127.614,200,100C200,44.771,155.228,0,100,0z"/>
+                                            | <path style="opacity:0.5;fill:#FFFFFF;" d="M100,0C44.772,0,0,44.771,0,100c0,6.904,0.7,13.644,2.032,20.154
+                                            | c0.5,2.441,1.088,4.85,1.762,7.223c2.471,8.7,6.09,16.918,10.684,24.477c0.835,1.375,1.703,2.727,2.601,4.057
+                                            | c1.348,1.995,2.766,3.939,4.25,5.828c2.474,3.148,5.133,6.144,7.961,8.972l7.071-7.071C20.074,147.353,10,124.853,10,100
+                                            | c0-49.706,40.294-90,90-90s90,40.294,90,90c0,24.853-10.074,47.353-26.36,63.64l7.071,7.071c2.828-2.828,5.487-5.824,7.961-8.972
+                                            | c1.484-1.889,2.902-3.833,4.25-5.828c0.898-1.33,1.766-2.683,2.601-4.057c2.088-3.436,3.975-7.008,5.644-10.7
+                                            | c0.668-1.477,1.3-2.972,1.897-4.486c1.194-3.028,2.244-6.128,3.143-9.291c0.674-2.373,1.262-4.782,1.762-7.223
+                                            | C199.3,113.644,200,106.904,200,100C200,44.771,155.228,0,100,0z"/>
+                                            | <rect id="sceneTimeAtackRunEngineConditionMater" x="100" y="100" width="3" height="100" transform="rotate(45 100 100)" fill="#F00"></rect>
+                                    div.run__engine-condition__box-right
+                                        div.run__engine-condition__speed
+                                            span#sceneTimeAtackRunEngineConditionSpeedTxt.run__engine-condition__txt 0
+                                            span.run__engine-condition__txt2 km
+                        div.run__inner-rt
+                            a#sceneTimeAtackRunBtnPause.run__btn-pause Pause
+                            div#sceneTimeAtackRunCourseMap.run__course-map
+                                div.run__course-map__inner
+                                    canvas#sceneTimeAtackRunCourseMapCanvas.run__course-map__canvas(height="200", width="200")
+                                    div#sceneTimeAtackRunCourseMapCar.run__course-map__car
+                                    div.sceneTimeAtackRunCourseMapCarOther.run__course-map__car__other(style="display:none", data-id="")
+                        div.run__inner-rb
+                            div#sceneTimeAtackRunPlayers.run__players
+                                ul#sceneTimeAtackRunPlayersList.run__players__list
+                                    li(data-id="")
+                                        div.run__players__box
+                                            div.run__players__box-left
+                                                svg.sceneTimeAtackRunPlayersListColor.run__players__color(viewBox="0 0 20 20")
+                                                    g#chassis
+                                                        |<polygon style="fill:#040000;" points="10.828,17.56 10.828,1.247 8.216,1.247 8.216,17.56 7.071,17.56 7.071,19.348
+                                                        |11.976,19.348 11.976,17.56 	"/>
+                                                        |<rect x="5.302" y="4.076" style="fill:#040000;" width="1.65" height="2.122"/>
+                                                        |<rect x="12.059" y="4.076" style="fill:#040000;" width="1.65" height="2.122"/>
+                                                        |<rect x="5.211" y="17.261" style="fill:#040000;" width="1.65" height="2.122"/>
+                                                        |<rect x="12.15" y="17.261" style="fill:#040000;" width="1.65" height="2.122"/>
+                                                        |<rect x="5.846" y="18.136" style="fill:#040000;" width="7.335" height="0.482"/>
+                                                        |<rect x="5.846" y="4.89" style="fill:#040000;" width="7.335" height="0.482"/>
+                                                    g#wing
+                                                        |<rect x="5.364" y="0.693" style="fill:#CCCCCC;" width="8.284" height="1.864"/>
+                                                        |<rect x="7.672" y="17.847" style="fill:#CCCCCC;" width="3.64" height="1.498"/>
+                                                    g#driver
+                                                        |<ellipse style="fill:#FFFFFF;" cx="9.463" cy="11.981" rx="0.874" ry="0.904"/>
+                                                    g#body
+                                                        |<path style="fill:#666666;" d="M10.878,9.089L9.987,0.35H8.997L8.106,9.089L6.478,9.536v4.021l0.911,4.021h4.191l0.911-4.021V9.536
+                                                        |L10.878,9.089z M8.36,13.017l0.455-2.369h1.302l0.455,2.369H8.36z"/>
+                                            div.run__players__box-right
+                                                p.sceneTimeAtackRunPlayersListName.run__players__txt &nbsp;
+                        div.run__inner-cm
+                            div#sceneTimeAtackRunMessage.run__message
+                                p#sceneTimeAtackRunMessageTxt.run__message__txt &nbsp;
+                        div#sceneTimeAtackRunPauseWindow.run__pause(style="display:none;")
+                            div#sceneTimeAtackRunPauseWindowInner.run__pause__inner
+                                a#sceneTimeAtackRunPauseWindowBtnResume.run__btn-resume Resume
+                                a#sceneTimeAtackRunPauseWindowBtnRetry.run__btn-retry Retry
+                                div#sceneTimeAtackRunPauseWindowSave.run__pause__box(style="display:none;")
+                                    h3.run__pause__ttl SaveFastestLapTime
+                                    div#sceneTimeAtackRunPauseWindowSaveForm(style="display:none;")
+                                        div.run__pause__box2
+                                            div.run__pause__box2-left
+                                                h4.run__pause__ttl2 LapTime
+                                            div.run__pause__box2-right
+                                                p#sceneTimeAtackRunPauseWindowSaveLapTime.run__pause__txt 00:00:00
+                                        div.run__pause__box2
+                                            div.run__pause__box2-left
+                                                h4.run__pause__ttl2 Name
+                                            div.run__pause__box2-right
+                                                input#sceneTimeAtackRunPauseWindowSaveName.run__pause__input-text(type="text", name="name", maxlength="15")
+                                        div.run__pause__box2
+                                            div.run__pause__box2-left
+                                                h4.run__pause__ttl2 Comment
+                                            div.run__pause__box2-right
+                                                textarea#sceneTimeAtackRunPauseWindowSaveComment.run__pause__textarea(cols="20", rows="3", name="comment", maxlength="40")
+                                        a#sceneTimeAtackRunPauseWindowSaveBtnSave.run__btn-save Save
+                                    div#sceneTimeAtackRunPauseWindowSaveProgress(style="display:none;") SendingData...
+                                    div#sceneTimeAtackRunPauseWindowSaveComplete(style="display:none;")
+                                        div.run__pause__box3
+                                            div.run__pause__box3-left
+                                                h4.run__pause__ttl2 Rank
+                                            div.run__pause__box3-right
+                                                span#sceneTimeAtackRunPauseWindowSaveCompleteRank.run__pause__txt2 0
+                                                | &nbsp; /&nbsp;
+                                                span#sceneTimeAtackRunPauseWindowSaveCompleteLength.run__pause__txt 0
+                                        div.run__pause__box3
+                                            div.run__pause__box3-left
+                                                h4.run__pause__ttl2 LapTime
+                                            div.run__pause__box3-right
+                                                p#sceneTimeAtackRunPauseWindowSaveCompleteLapTime.run__pause__txt 00:00:00
+                                        div.run__pause__box3
+                                            div.run__pause__box3-left
+                                                h4.run__pause__ttl2 Name
+                                            div.run__pause__box3-right
+                                                p#sceneTimeAtackRunPauseWindowSaveCompleteName.run__pause__txt3 &nbsp;
+                                        a#sceneTimeAtackRunPauseWindowSaveBtnTweet.run__btn-tweet Tweet
+
+            // #ranking
+            div#ranking.ranking(style="display: none;")
+                div.ranking__inner
+                    ul#rankingList.ranking__list
+                        li
+                            div.rankingListRank.ranking__list__box-rank 1
+                            div.rankingListTime.ranking__list__box-time 00:00:00
+                            div.rankingListName.ranking__list__box-name &nbsp;
+                            div.rankingListComment.ranking__list__box-comment &nbsp;
+
+        // #error
+        div#error.error(style="display: none;")
+            div.error__inner-cm
+                h1.error__ttl
+                    span.error__ttl__txt #{title}
+                    span.error__ttl__txt2 &nbsp;#{version}
+                p#errorMsg.error__msg
+
+        // #footer
+        div#footer.footer
+            div.footer__inner
+                div.footer__box
+                    div.footer__box-left
+                        div.footer__fb
+                            |<div class="fb-share-button" data-href="http://js-racing.knockknock.jp/" data-width="100" data-type="button_count"></div>
+                        div.footer__tw
+                            |<a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="JS-Racing">Tweet</a>
+                            |<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                    div.footer__box-right
+                        p.footer__copy
+                            small &copy;copyright 2014&nbsp;
+                                a.footer__link(href="http://www.knockknock.jp/", target="_blank") knockknock.jp
+                                | .
+
+        // JS
+        script(src="/socket.io/socket.io.js")
+        script(src="js/lib/Stats.js")
+        script(src="js/lib/jquery-1.10.1.min.js")
+        script(src="js/lib/three.min.js")
+        script(src="js/lib/OrbitControls.js")
+        script(src="js/lib/OBJLoader.js")
+        script(src="js/lib/MTLLoader.js")
+        script(src="js/lib/OBJMTLLoader.js")
+        script(src="js/lib/Box2dWeb-2.1.a.3.js")
+        script(src="js/lib/lib.js")
+        script(src="js/imjcart.js")
+        script(src="js/index.js")
+
+        // GA
+        script
+            |(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            |    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            |        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            |})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+            |ga('create', 'UA-52353637-1', 'auto');
+            |ga('send', 'pageview');

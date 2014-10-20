@@ -1,0 +1,73 @@
+@mixin clearfix() {
+  min-height: 1px;
+  zoom: 1;
+  &:after {
+    content: ".";
+    display: block;
+    clear: both;
+    height: 0;
+    visibility: hidden;
+  }
+}
+
+@mixin position($key, $key2) {
+  position: absolute;
+  @if $key == "left" {
+    @if $key2 == "top" {
+      left: 0;
+      top: 0;
+      display: inline-block;
+    } @else if $key2 == "middle" {
+      left: 0;
+      top: 50%;
+      display: inline-block;
+      -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+    } @else if $key2 == "bottom" {
+      left: 0;
+      bottom: 0;
+      display: inline-block;
+    }
+  } @else if $key == "center" {
+    @if $key2 == "top" {
+      left: 50%;
+      top: 0;
+      display: inline-block;
+      -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+      transform: translateX(-50%);
+    } @else if $key2 == "middle" {
+      left: 50%;
+      top: 50%;
+      display: inline-block;
+      -webkit-transform: translate(-50%,-50%);
+      -ms-transform: translate(-50%,-50%);
+      transform: translate(-50%,-50%);
+    } @else if $key2 == "bottom" {
+      left: 50%;
+      bottom: 0;
+      display: inline-block;
+      -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+      transform: translateX(-50%);
+    }
+  } @else if $key == "right" {
+    @if $key2 == "top" {
+      right: 0;
+      top: 0;
+      display: inline-block;
+    } @else if $key2 == "middle" {
+      right: 0;
+      top: 50%;
+      display: inline-block;
+      -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+    } @else if $key2 == "bottom" {
+      right: 0;
+      bottom: 0;
+      display: inline-block;
+    }
+  }
+}

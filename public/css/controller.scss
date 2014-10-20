@@ -1,0 +1,170 @@
+$experimental-support-for-mozilla: true !default;
+$experimental-support-for-webkit: true !default;
+$experimental-support-for-opera: false !default;
+$experimental-support-for-microsoft: false !default;
+
+@import "compass";
+@import "ptp-12";
+@import "mixin";
+@import "common";
+
+body {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -webkit-text-size-adjust: 100%;
+}
+
+a {
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.controller {
+  position: relative;
+  background-image: url("../img/controller__bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  width: 320px;
+  height: 480px;
+  .inner-cm2 {
+    @include position("center", "middle");
+    @extend %m__box-black;
+    padding: 20px;
+    width: 90%;
+  }
+  .inner-lt {
+    @include position("left", "top");
+    @include box-sizing("border-box");
+    padding-left: 10px;
+    padding-right: 5px;
+    padding-top: 10px;
+    width: 100%;
+  }
+  .inner-cm {
+    @include position("center", "middle");
+    @include box-sizing("border-box");
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100%;
+    @include clearfix();
+  }
+  .inner-lb {
+    @include position("left", "bottom");
+    @include box-sizing("border-box");
+    padding-left: 10px;
+    padding-bottom: 10px;
+    padding-right: 5px;
+    width: 50%;
+  }
+  .inner-rb {
+    @include position("right", "bottom");
+    @include box-sizing("border-box");
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    width: 50%;
+  }
+  .ttl {
+    margin: 0 auto 20px auto;
+    text-align: center;
+    .ttl__txt {
+      @extend %m__txt-logo-sp;
+      line-height: 1em;
+    }
+    .ttl__txt2 {
+      line-height: 1.2em;
+      font-weight: bold;
+      font-size: $px18;
+    }
+  }
+  .txt {
+    @extend %m__txt-size-m;
+    text-align: center;
+  }
+  .btn-play {
+    @extend %m__btn-white;
+    margin: 0 auto;
+    width: 200px;
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+  }
+  .btn-camera {
+    display: block;
+    height: 55px;
+    width: 100%;
+    border-radius: 10px;
+    background-image: url("../img/controller__btn-camera.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgba(0, 0, 0, 0.30);
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+    &.active {
+      background-color: rgba(255, 126, 0, 0.30);
+    }
+  }
+  .btn-handle-left {
+    display: block;
+    float: left;
+    height: 55px;
+    width: 50%;
+    border-radius: 10px 0 0 10px;
+    background-image: url("../img/controller__btn-handle-left.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(0, 0, 0, 0.30);
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+    &.active {
+      background-color: rgba(255, 255, 0, 0.30);
+    }
+  }
+  .btn-handle-right {
+    display: block;
+    float: right;
+    height: 55px;
+    width: 50%;
+    border-radius: 0 10px 10px 0;
+    background-image: url("../img/controller__btn-handle-right.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left;
+    background-color: rgba(0, 0, 0, 0.30);
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+    &.active {
+      background-color: rgba(255, 200, 0, 0.30);
+    }
+  }
+  .btn-accelarator {
+    display: block;
+    height: 55px;
+    width: 100%;
+    border-radius: 10px;
+    background-image: url("../img/controller__btn-accelarator.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgba(0, 0, 0, 0.30);
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+    &.active {
+      background-color: rgba(0, 125, 255, 0.3);
+    }
+  }
+  .btn-back {
+    display: block;
+    height: 55px;
+    width: 100%;
+    border-radius: 10px;
+    background-image: url("../img/controller__btn-back.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgba(0, 0, 0, 0.30);
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+    &.active {
+      background-color: rgba(255, 0, 0, 0.3);
+    }
+  }
+}
